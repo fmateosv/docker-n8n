@@ -6,7 +6,7 @@ services:
     container_name: n8n
     restart: always
     env_file:
-      - ../.env.global
+      - .env
     environment:
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_HOST=postgres

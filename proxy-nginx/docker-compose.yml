@@ -5,7 +5,7 @@ services:
     container_name: nginx-proxy
     restart: always
     env_file:
-      - ../.env.global
+      - .env
     ports:
       - "80:80"
       - "443:443"

@@ -6,7 +6,7 @@ services:
     container_name: code-sandbox
     restart: always
     env_file:
-      - ../.env.global
+      - .env
     environment:
       - PASSWORD=${CODE_PASS}
       - VIRTUAL_HOST=n8n-sandbox.fmateos.es

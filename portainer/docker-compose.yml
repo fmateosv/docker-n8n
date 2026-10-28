@@ -6,7 +6,7 @@ services:
     container_name: portainer
     restart: always
     env_file:
-      - ../.env.global
+      - .env
     ports:
       - "9000:9000"
     volumes:
