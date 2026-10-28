@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: always
+    env_file:
+      - ../.env.global
+    environment:
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=${POSTGRES_DB}
+      - DB_POSTGRESDB_USER=${POSTGRES_USER}
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASS}
+      - N8N_HOST=n8n.fmateos.es
+      - WEBHOOK_URL=https://n8n.fmateos.es/
+      - VIRTUAL_HOST=n8n.fmateos.es
+      - LETSENCRYPT_HOST=n8n.fmateos.es
+      - LETSENCRYPT_EMAIL=${SSL_EMAIL}
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./data:/home/node/.n8n
+    depends_on:
+      - postgres
+    networks:
+      - infra_net
+
+networks:
+  infra_net:
+    external: true
